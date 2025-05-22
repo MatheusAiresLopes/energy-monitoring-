@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>📊 Histórico de Consumo</title>
+  <link rel="stylesheet" href="/styles/historico-consumo.css">
+  <script src="/scripts/historico-consumo.js"></script>
+</head>
+<body>
+
+  <h1>📊 Histórico de Consumo</h1>
+
+  <form method="GET" action="/consumption/history-page">
+    <label for="userId">Código do Usuário:</label>
+    <input type="number" id="userId" name="userId" required placeholder="Digite o ID do usuário...">
+
+    <label for="startDate">Data Inicial:</label>
+    <input type="date" id="startDate" name="startDate">
+
+    <label for="endDate">Data Final:</label>
+    <input type="date" id="endDate" name="endDate">
+
+    <button type="submit">Consultar Histórico</button>
+  </form>
+
+  {{#if history.length}}
+    <table>
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>kWh Consumido</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each history}}
+          <tr>
+            <td>{{this.date}}</td>
+            <td>{{this.kwh}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  {{else}}
+    <div class="no-history">
+      Nenhum histórico de consumo encontrado.
+    </div>
+  {{/if}}
+
+  
+
+</body> 
+</html>

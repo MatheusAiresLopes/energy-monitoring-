@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>🔔 Alertas de Consumo Elevado</title>
+  <link rel="stylesheet" href="/styles/alertas-consumo.css">
+<script src="/scripts/alertas-consumo.js"></script>
+</head>
+<body>
+
+  <h1>🔔 Alertas de Consumo Elevado</h1>
+
+  <form method="GET" action="/consumption/alerts-page">
+    <label for="userId">Código do Usuário:</label>
+    <input type="number" id="userId" name="userId" required placeholder="Digite o ID do usuário...">
+
+    <button type="submit">Consultar Alertas</button>
+  </form>
+
+  {{#if alerts.length}}
+    <ul>
+      {{#each alerts}}
+        <li>
+          <strong>Data:</strong> {{this.date}} <br>
+          <strong>Consumo:</strong> {{this.kwh}} kWh
+        </li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <div class="no-alerts" id="no-alerts">
+      Nenhum alerta de consumo elevado encontrado.
+    </div>
+  {{/if}}
+
+</body>
+</html>

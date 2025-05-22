@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>📝 Cadastro de Consumo</title>
+  <link rel="stylesheet" href="/styles/cadastro-consumo.css">
+  <script src="/scripts/cadastro-consumo.js"></script>
+</head>
+<body>
+
+  <h1>📝 Cadastro de Consumo</h1>
+
+  <form method="POST" action="/consumption">
+    <label for="userId">Código do Usuário:</label>
+    <input type="number" id="userId" name="userId" required placeholder="Digite o ID do usuário...">
+
+    <label for="kwh">Energia Consumida (kWh):</label>
+    <input type="number" id="kwh" name="kwh" step="0.01" required placeholder="Ex.: 12.34">
+
+    <label for="date">Data do Consumo:</label>
+    <input type="date" id="date" name="date" required>
+
+    <button type="submit">Cadastrar</button>
+  </form>
+</body>
+</html> 

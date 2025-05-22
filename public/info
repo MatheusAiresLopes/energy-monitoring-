@@ -1,0 +1,5 @@
+Rotas para acessas as telas:
+http://localhost:3000/consumption/tela
+http://localhost:3000/consumption/cadastro
+http://localhost:3000/consumption/history-page?userId=1&startDate=2025-03-22&endDate=2025-05-22
+http://localhost:3000/consumption/alerts-page?userId=1

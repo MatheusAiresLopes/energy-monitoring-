@@ -1,70 +1,37 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>Consumo de Energia</title>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 20px;
-      }
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>⚡ Relatório de Consumo de Energia</title>
+  <link rel="stylesheet" href="/styles/consumption.css">
+</head>
+<body>
 
-      .user {
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        padding: 15px;
-        margin-bottom: 20px;
-      }
+  <h1>⚡ Relatório de Consumo de Energia</h1>
 
-      .user h2 {
-        margin-top: 0;
-      }
+  {{#each users}}
+    <div class="user">
+      <h2>{{name}} (ID: {{userId}})</h2>
+      <p>Total de Consumo: {{totalKwh}} kWh</p>
 
-      table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 10px;
-      }
-
-      table, th, td {
-        border: 1px solid #aaa;
-      }
-
-      th, td {
-        padding: 8px;
-        text-align: left;
-      }
-
-      th {
-        background-color: #f5f5f5;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Relatório de Consumo de Energia</h1>
-
-    {{#each users}}
-      <div class="user">
-        <h2>{{name}} (ID: {{userId}})</h2>
-        <p><strong>Total de Consumo:</strong> {{totalKwh}} kWh</p>
-
-        <table>
-          <thead>
+      <table>
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Consumo (kWh)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each records}} 
             <tr>
-              <th>Data</th>
-              <th>Consumo (kWh)</th>
+              <td>{{date}}</td>
+              <td>{{kwh}}</td>
             </tr>
-          </thead>
-          <tbody>
-            {{#each records}}
-              <tr>
-                <td>{{date}}</td>
-                <td>{{kwh}}</td>
-              </tr>
-            {{/each}}
-          </tbody>
-        </table>
-      </div>
-    {{/each}}
-  </body>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  {{/each}} 
+
+</body>
 </html>

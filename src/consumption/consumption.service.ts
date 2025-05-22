@@ -4,13 +4,14 @@ import { Repository } from 'typeorm';
 import { Consumption } from './consumption.entity';
 import { User } from '../users/users.entity';
 import { CreateConsumptionDto } from './../dtos/history.dto';
+import { Between } from 'typeorm';
+
 
 @Injectable()
 export class ConsumptionService {
   constructor(
     @InjectRepository(Consumption)
     private consumptionRepository: Repository<Consumption>,
-
     @InjectRepository(User)
     private userRepository: Repository<User>,
   ) {}
@@ -63,4 +64,32 @@ export class ConsumptionService {
       }))
     }));
   }
+async getConsumptionHistory(userId: number, startDate: string, endDate: string): Promise<Consumption[]> {
+    return this.consumptionRepository.find({
+      where: {
+        user: { id: userId },
+        date: Between(startDate, endDate),
+      },
+      relations: ['user'],
+    });
+  }
+
+  async getHighConsumptionAlerts(userId: number): Promise<Consumption[]> {
+    const today = new Date();
+    const twoMonthsAgo = new Date(today.getFullYear(), today.getMonth() - 2, today.getDate());
+    const startDate = twoMonthsAgo.toISOString().split('T')[0];
+    const endDate = today.toISOString().split('T')[0];
+
+    const consumptions = await this.consumptionRepository.find({
+      where: {
+        user: { id: userId },
+        date: Between(startDate, endDate),
+      },
+      relations: ['user'],
+    });
+
+    // Consumo elevado: maior que 100 kWh
+    return consumptions.filter(c => c.kwh > 100);
+  }
+  
 }
